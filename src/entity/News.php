@@ -1,10 +1,24 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity]
+#[ORM\Table(name:"news")]
 class News
 {
-	private $id, $title, $body, $createdAt;
+	#[ORM\Id]
+	#[ORM\Column(type:"integer")]
+	#[ORM\GeneratedValue]
+	private int|null $id = null;
+
+	#[ORM\Column(type:"string")]
+	private string $title; 
+
+	#[ORM\Column(type:"string")]
+	private string $body;
+	#[ORM\Column(type:"datetime", name:"created_at")]
+	private \DateTime $createdAt;
 
 	public function setId($id)
 	{

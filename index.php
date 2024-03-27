@@ -1,18 +1,15 @@
 <?php
 
-require 'vendor/autoload.php';
+require 'bootstrap.php';
 
-use App\Utils\CommentManager;
-use App\Utils\NewsManager;
-
-$newsManager = new NewsManager();
-$commentManager = new CommentManager();
-foreach ($newsManager->listNews() as $news) {
-    echo("############ NEWS " . $news["title"] . " ############\n");
-    echo($news["body"] . "\n");
-    foreach($commentManager->listComments() as $comment) {
-        if($comment['news_id'] === $news['id']){
-            echo("Comment " . $comment['id'] . " : " . $comment['body'] . "\n");
+$newsRepository = $entityManager->getRepository('App\Entity\News');
+$commentManager = $entityManager->getRepository('App\Entity\Comment');
+foreach ($newsRepository->findAll() as $news) {
+    echo("############ NEWS " . $news->getTitle() . " ############\n");
+    echo($news->getBody() . "\n");
+    foreach($commentManager->findAll() as $comment) {
+        if($comment->getNewsId() === $news->getId()){
+            echo("Comment " . $comment->getId() . " : " . $comment->getBody() . "\n");
         }
     }
 }

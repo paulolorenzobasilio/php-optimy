@@ -1,10 +1,25 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity]
+#[ORM\Table(name:"comment")]
 class Comment
 {
-	private $id, $body, $createdAt, $newsId;
+	#[ORM\Id]
+	#[ORM\Column(type:"integer")]
+	#[ORM\GeneratedValue]
+	private int|null $id = null;
+
+	#[ORM\Column(type:"string")]
+	private string $body;
+
+	#[ORM\Column(type:"datetime", name:"created_at")]
+	private \DateTime $createdAt; 
+
+	#[ORM\Column(type:"integer")]
+	private int|null $newsId;
 
 	public function setId($id)
 	{
