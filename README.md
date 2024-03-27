@@ -9,7 +9,7 @@
 - install the dependencies `composer install`
 - create an empty database named "phptest" on your MySQL server
 - import the dbdump.sql in the "phptest" database
-- copy env file: ```cp .env.example .env```
+- copy env file: ```cp .env.dist .env```
 - update your Mysql Credentials
   ```
   DB_HOST="localhost"
