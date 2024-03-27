@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 #[ORM\Entity]
 #[ORM\Table(name:"comment")]
@@ -18,8 +19,9 @@ class Comment
 	#[ORM\Column(type:"datetime", name:"created_at")]
 	private \DateTime $createdAt; 
 
-	#[ORM\Column(type:"integer")]
-	private int|null $newsId;
+	#[ORM\JoinColumn(name:"news_id", referencedColumnName:"id")]
+	#[ManyToOne(targetEntity: News::class, inversedBy: 'comments')]
+	private News|null $news = null;
 
 	public function setId($id)
 	{
@@ -56,15 +58,8 @@ class Comment
 		return $this->createdAt;
 	}
 
-	public function getNewsId()
+	public function getNews()
 	{
-		return $this->newsId;
-	}
-
-	public function setNewsId($newsId)
-	{
-		$this->newsId = $newsId;
-
-		return $this;
+		return $this->news;
 	}
 }

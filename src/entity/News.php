@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 
 #[ORM\Entity]
 #[ORM\Table(name:"news")]
@@ -19,6 +22,13 @@ class News
 	private string $body;
 	#[ORM\Column(type:"datetime", name:"created_at")]
 	private \DateTime $createdAt;
+
+	#[OneToMany(targetEntity: Comment::class, mappedBy:"news")]
+	private Collection $comments;
+
+	public function __construct(){
+		$this->comments = new ArrayCollection();
+	}
 
 	public function setId($id)
 	{
@@ -66,5 +76,13 @@ class News
 	public function getCreatedAt()
 	{
 		return $this->createdAt;
+	}
+
+	public function addComment(Comment $comment){
+		$this->comments[] = $comment;
+	}
+
+	public function getComments(){
+		return $this->comments;
 	}
 }
