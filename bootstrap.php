@@ -3,10 +3,11 @@
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ParameterBag\ContainerBag;
 
 require_once "vendor/autoload.php";
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 $config = ORMSetup::createAttributeMetadataConfiguration(
     paths: array(__DIR__."/src"),
@@ -14,11 +15,11 @@ $config = ORMSetup::createAttributeMetadataConfiguration(
 );
 
 $connection = DriverManager::getConnection([
-    'driver' => 'pdo_mysql',
-    'dbname' => 'phptest',
-    'user' => 'root',
-    'password' => 'root',
-    'host' => 'localhost'
+    'driver' => $_ENV["DB_DRIVER"],
+    'dbname' => $_ENV['DB_NAME'],
+    'user' => $_ENV['DB_USER'],
+    'password' => $_ENV["DB_PASSWORD"],
+    'host' => $_ENV['DB_HOST']
 ], $config);
 
 $entityManager = new EntityManager($connection, $config);

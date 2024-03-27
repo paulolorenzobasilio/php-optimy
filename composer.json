@@ -9,6 +9,7 @@
         "doctrine/orm": "^3",
         "doctrine/dbal": "^4",
         "symfony/cache": "^7",
-        "symfony/dependency-injection": "^7.0"
+        "symfony/dependency-injection": "^7.0",
+        "vlucas/phpdotenv": "^5.6"
     }
 }
