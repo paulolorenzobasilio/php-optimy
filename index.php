@@ -1,18 +1,18 @@
 <?php
 
-define('ROOT', __DIR__);
-require_once(ROOT . '/utils/NewsManager.php');
-require_once(ROOT . '/utils/CommentManager.php');
+require 'vendor/autoload.php';
 
-foreach (NewsManager::getInstance()->listNews() as $news) {
-	echo("############ NEWS " . $news->getTitle() . " ############\n");
-	echo($news->getBody() . "\n");
-	foreach (CommentManager::getInstance()->listComments() as $comment) {
-		if ($comment->getNewsId() == $news->getId()) {
-			echo("Comment " . $comment->getId() . " : " . $comment->getBody() . "\n");
-		}
-	}
+use App\Utils\CommentManager;
+use App\Utils\NewsManager;
+
+$newsManager = new NewsManager();
+$commentManager = new CommentManager();
+foreach ($newsManager->listNews() as $news) {
+    echo("############ NEWS " . $news["title"] . " ############\n");
+    echo($news["body"] . "\n");
+    foreach($commentManager->listComments() as $comment) {
+        if($comment['news_id'] === $news['id']){
+            echo("Comment " . $comment['id'] . " : " . $comment['body'] . "\n");
+        }
+    }
 }
-
-$commentManager = CommentManager::getInstance();
-$c = $commentManager->listComments();

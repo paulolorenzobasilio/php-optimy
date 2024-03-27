@@ -1,8 +1,10 @@
 <?php
 
+namespace App\Entity;
+
 class News
 {
-	protected $id, $title, $body, $createdAt;
+	private $id, $title, $body, $createdAt;
 
 	public function setId($id)
 	{

@@ -1,12 +1,14 @@
 <?php
 
+namespace App\Utils;
+
 class DB
 {
 	private $pdo;
 
 	private static $instance = null;
 
-	private function __construct()
+	public function __construct()
 	{
 		$dsn = 'mysql:dbname=phptest;host=127.0.0.1';
 		$user = 'root';
@@ -28,15 +30,5 @@ class DB
 	{
 		$sth = $this->pdo->query($sql);
 		return $sth->fetchAll();
-	}
-
-	public function exec($sql)
-	{
-		return $this->pdo->exec($sql);
-	}
-
-	public function lastInsertId()
-	{
-		return $this->pdo->lastInsertId();
 	}
 }

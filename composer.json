@@ -1,0 +1,8 @@
+{
+    "name": "paulo/php-optimy",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

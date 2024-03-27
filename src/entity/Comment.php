@@ -1,8 +1,10 @@
 <?php
 
+namespace App\Entity;
+
 class Comment
 {
-	protected $id, $body, $createdAt, $newsId;
+	private $id, $body, $createdAt, $newsId;
 
 	public function setId($id)
 	{
